@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-6">
+      <h2 class="mb-4">Agregar un nuevo curso</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id_titulo" class="form-label">Título:</label>
+          <input type="text" name="titulo" class="form-control" id="id_titulo">
+        </div>
+        <div class="mb-3">
+          <label for="id_materia" class="form-label">Materia:</label>
+          <input type="text" name="materia" class="form-control" id="id_materia">
+        </div>
+        <div class="mb-3">
+          <label for="id_duracion" class="form-label">Duración (horas):</label>
+          <input type="number" name="duracion" class="form-control" id="id_duracion">
+        </div>
+        <div class="mb-3">
+          <label for="id_profesor" class="form-label">Profesor:</label>
+          <input type="text" name="profesor" class="form-control" id="id_profesor">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <img src="{% static 'assets/img/curso.png' %}" alt="Imagen Curso" class="img-fluid rounded">
+    </div>
+  </div>
+</div>
+{% endblock %}
