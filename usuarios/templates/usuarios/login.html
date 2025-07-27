@@ -1,13 +1,12 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
+{% block title_text %}Login{% endblock title_text %}
+{% block h1_text %}Login{% endblock h1_text %}
 
-{% block title_text %} Login{% endblock title_text%}
-
-{% block h1_text %} Login{% endblock h1_text%}
 {% block main %}
-<form action= {% url "usuarios:login" %} method="post">
+<form action="{% url 'usuarios:login' %}" method="post">
     {% csrf_token %}
-    {{formulario}}
-    <input type="submit" value="Login">
+    {{ formulario.as_p }}
+    <input type="submit" value="Iniciar sesión" class="btn btn-primary">
 </form>
 {% endblock main %}
