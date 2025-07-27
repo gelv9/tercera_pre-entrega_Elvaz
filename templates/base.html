@@ -26,7 +26,12 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'alta_curso' %}">Nuevo Curso</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-primary nav-link py-1 px-0 px-lg-3 rounded" href="#!">Login</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-secondary nav-link py-1 px-0 px-lg-3 rounded" href="#!">Logout</a></li>
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <form action={% url "usuarios:logout" %} method="post">
+                                {% csrf_token %}
+                                <imput class="btn btn-secondary nav-link py-1 px-0 px-lg-3 rounded" type="submit" value="Logout">
+                            </form>
+                        </li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-warning nav-link py-1 px-0 px-lg-3 rounded" href="#!">Registro</a></li>
                         <!--<li class="nav-item"><a class="nav-link" href="#!">Contacto</a></li>-->
                         
