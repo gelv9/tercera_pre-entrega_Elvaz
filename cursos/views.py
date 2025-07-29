@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
-from .forms import CursoForm
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.urls import reverse_lazy
+from .models import Curso
 
-def alta_curso(request):
-    if request.method == 'POST':
-        form = CursoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
-    else: 
-        form = CursoForm()
-    return render(request, 'alta_curso.html', {'form':form})
-    
+class AltaCursoView(UserPassesTestMixin, CreateView):
+    model = Curso
+    fields = ['titulo', 'materia', 'duracion', 'profesor']
+    template_name = 'alta_curso.html'
+    success_url = reverse_lazy('inicio:inicio')
+
+    def test_func(self):
+        return self.request.user.is_superuser

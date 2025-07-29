@@ -3,5 +3,24 @@
 {% block content %}
 <h1 class="display-5 fw-bold">Bienvenido a nuestra plataforma de cursos</h1>
 <p class="fs-4">Explorá nuestros cursos disponibles y empezá a aprender.</p>
-<a class="btn btn-primary btn-lg" href="#">Ver cursos</a>
+
+{% if cursos %}
+  <div class="row mt-4">
+    {% for curso in cursos %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ curso.titulo }}</h5>
+            <p class="card-text"><strong>Materia:</strong> {{ curso.materia }}</p>
+            <p class="card-text"><strong>Duración:</strong> {{ curso.duracion }} horas</p>
+            <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="mt-4">Todavía no hay cursos disponibles.</p>
+{% endif %}
+
 {% endblock %}

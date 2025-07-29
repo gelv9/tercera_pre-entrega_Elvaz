@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from cursos.models import Curso
 
-# Create your views here.
-def inicio(request):
-    return render(request, 'inicio/inicio.html')
+
+class ListaCursosView(ListView):
+    model = Curso
+    template_name = 'inicio/inicio.html'
+    context_object_name = 'cursos'
+    
