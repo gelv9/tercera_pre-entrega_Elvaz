@@ -8,6 +8,7 @@ from usuarios.models import InfoExtra
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from .models import InfoExtra
 
 def login(request):
     if request.method == 'POST':
@@ -31,27 +32,28 @@ def registro(request):
         formulario = FormularioRegistro(request.POST)
         if formulario.is_valid():
             formulario.save()
-        return redirect ("ususarios:login")
+        return redirect ("usuarios:login")
     else:
         formulario = FormularioRegistro()
     return render(request, 'usuarios/registro.html', {'formulario': formulario})
 
 @login_required
 def editar_perfil(request):
-    info_extra = request.user.infoextra
+    usuario = request.user
+    info_extra, _ = InfoExtra.objects.get_or_create(user=usuario)
+
     if request.method == "POST":
-        formulario = FormularioEdicionPerfil(request.POST, request.FILES, instance=request.user)
+        formulario = FormularioEdicionPerfil(request.POST, request.FILES, instance=usuario)
         if formulario.is_valid():
-            avatar = formulario.cleaned_data.get('avatar')
-            info_extra.avatar = avatar if avatar else info_extra.avatar
-            info_extra.save()
             formulario.save()
-            return redirect("inicio:inicio")
-        else:
-            return render(request, 'usuarios/registro.html', {'formulario': formulario})
+            info_extra.avatar = formulario.cleaned_data.get('avatar')
+            info_extra.save()
+            return redirect('inicio:inicio')
     else:
-        formulario = FormularioEdicionPerfil(instance=request.user, initial={'avatar': info_extra.avatar})
-        return render(request, 'usuarios/registro.html', {'formulario': formulario})
+        formulario = FormularioEdicionPerfil(instance=usuario)
+
+    return render(request, 'usuarios/editar_perfil.html', {'formulario': formulario})
+
 
 class CambioContrasenia(PasswordChangeView):
     template_name = 'usuarios/cambiar_contrasenia.html'
