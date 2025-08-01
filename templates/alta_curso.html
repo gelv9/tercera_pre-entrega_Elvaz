@@ -1,12 +1,15 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title_text %}Crear Curso{% endblock %}
 {% block h1_text %}Alta de Curso{% endblock %}
 
 {% block main %}
-  <form method="post">
+<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mt-5">
+  <form method="post" class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Guardar Curso</button>
+    <button type="submit" class="btn btn-primary w-100">Guardar Curso</button>
   </form>
+  <img src="{% static 'assets/img/create_course.png' %}" alt="Crear Curso" class="img-fluid shadow rounded" style="max-width: 400px;">
+</div>
 {% endblock %}

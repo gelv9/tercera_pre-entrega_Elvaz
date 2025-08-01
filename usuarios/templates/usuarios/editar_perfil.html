@@ -1,21 +1,15 @@
 {% extends "base.html" %}
-
-{% block title_text %}Editar perfil{% endblock title_text %}
-{% block h1_text %}Editar perfil{% endblock h1_text %}
+{% load static %}
+{% block title_text %}Editar Perfil{% endblock %}
+{% block h1_text %}Editar perfil{% endblock %}
 
 {% block main %}
-<form method="post" enctype="multipart/form-data">
+<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mt-5">
+  <form method="post" enctype="multipart/form-data" class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
     {% csrf_token %}
-    {{ formulario.as_p }}
-
-    <label for="id_avatar">Cambiar avatar:</label>
-    <input type="file" name="avatar" id="id_avatar">
-
-    {% if avatar_actual %}
-      <p>Avatar actual:</p>
-      <img src="{{ avatar_actual }}" alt="Avatar" width="100">
-    {% endif %}
-
-    <button type="submit">Guardar cambios</button>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
   </form>
-{%endblock main%}
+  <img src="{% static 'assets/img/edit_profile.png' %}" alt="Editar Perfil" class="img-fluid shadow rounded" style="max-width: 400px;">
+</div>
+{% endblock %}

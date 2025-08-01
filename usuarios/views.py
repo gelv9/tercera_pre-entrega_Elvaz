@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from .models import InfoExtra
+from django.contrib.auth import login as auth_login
 
 def login(request):
     if request.method == 'POST':
@@ -31,29 +32,36 @@ def registro(request):
     if request.method == "POST":
         formulario = FormularioRegistro(request.POST)
         if formulario.is_valid():
-            formulario.save()
-        return redirect ("usuarios:login")
+            usuario = formulario.save()
+            auth_login(request, usuario)
+            return redirect ("inicio:inicio")
     else:
         formulario = FormularioRegistro()
     return render(request, 'usuarios/registro.html', {'formulario': formulario})
 
 @login_required
 def editar_perfil(request):
-    usuario = request.user
-    info_extra, _ = InfoExtra.objects.get_or_create(user=usuario)
+    info_extra, _ = InfoExtra.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
-        formulario = FormularioEdicionPerfil(request.POST, request.FILES, instance=usuario)
+        formulario = FormularioEdicionPerfil(request.POST, instance=request.user)
+
         if formulario.is_valid():
             formulario.save()
-            info_extra.avatar = formulario.cleaned_data.get('avatar')
-            info_extra.save()
-            return redirect('inicio:inicio')
+
+            avatar = request.FILES.get('avatar')
+            if avatar:
+                info_extra.avatar = avatar
+                info_extra.save()
+
+            return redirect("inicio:inicio")
     else:
-        formulario = FormularioEdicionPerfil(instance=usuario)
+        formulario = FormularioEdicionPerfil(instance=request.user)
 
-    return render(request, 'usuarios/editar_perfil.html', {'formulario': formulario})
-
+    return render(request, 'usuarios/editar_perfil.html', {
+        'formulario': formulario,
+        'avatar_actual': info_extra.avatar.url if info_extra.avatar else None
+    })
 
 class CambioContrasenia(PasswordChangeView):
     template_name = 'usuarios/cambiar_contrasenia.html'

@@ -1,12 +1,15 @@
 {% extends "base.html" %}
-
-{% block title_text %}Registro{% endblock title_text %}
-{% block h1_text %}Registrarse{% endblock h1_text %}
+{% load static %}
+{% block title_text %}Registrarse{% endblock %}
+{% block h1_text %}Registrarse{% endblock %}
 
 {% block main %}
-<form action="{% url 'usuarios:registro' %}" method="post">
+<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mt-5">
+  <form method="post" class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
     {% csrf_token %}
-    {{ formulario.as_p }}
-    <input type="submit" value="Registrarse" class="btn btn-primary">
-</form>
-{% endblock main %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+  </form>
+  <img src="{% static 'assets/img/register.png' %}" alt="Registro" class="img-fluid shadow rounded" style="max-width: 400px;">
+</div>
+{% endblock %}

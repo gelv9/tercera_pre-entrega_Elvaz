@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="display-5 fw-bold">Bienvenido a ProgrAmando</h1>
-<p class="fs-4">Explorá nuestros cursos disponibles y empezá a aprender.</p>
+<h1 class="display-5 fw-bold">Todos los Cursos</h1>
 
 {% if cursos %}
   <div class="row mt-4">
@@ -20,13 +19,6 @@
     {% endfor %}
   </div>
 {% else %}
-  <p class="mt-4">Todavía no hay cursos disponibles.</p>
+  <p>No hay cursos disponibles.</p>
 {% endif %}
-
-<div class="text-center mt-4">
-  <a href="{% url 'cursos:lista_cursos' %}" class="btn btn-outline-dark btn-lg fw-semibold">
-    Ver todos los cursos
-  </a>
-</div>
-
 {% endblock %}

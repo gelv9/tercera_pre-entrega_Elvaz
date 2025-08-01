@@ -11,7 +11,7 @@ def inicio(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('inicio.urls')),
-    path('', include('cursos.urls')),
+    path('cursos/', include('cursos.urls', namespace='cursos')),
     path('usuarios/', include((usuarios.urls, 'usuarios'), namespace='usuarios')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,0 +1,178 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para títulos y textos */
+h1, h2, h3, h4, h5 {
+    font-weight: bold;
+    color: #111;
+}
+
+/* Enlaces */
+a {
+    color: #0057ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #ff4d00; /* Estilo Domestika */
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #ff4d00;
+    border-color: #ff4d00;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #e04300;
+    border-color: #e04300;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #000 !important;
+    border-bottom: 3px solid #ff4d00;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ff4d00 !important;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff4d00 !important;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+/* Avatar en navbar */
+.navbar .rounded-circle {
+    transition: transform 0.2s ease-in-out;
+    border: 2px solid #fff;
+}
+
+.navbar .rounded-circle:hover {
+    transform: scale(1.1);
+}
+
+/* Tarjetas */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+/* Formularios */
+form input, form select, form textarea {
+    border-radius: 6px;
+}
+
+/* Espaciado general */
+.container {
+    padding-bottom: 1.5rem;
+}
+.btn-login {
+    background-color: #343a40; /* Gris oscuro */
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-login:hover {
+    background-color: #495057;
+    color: #fff;
+}
+.btn-outline-dark {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+  transform: scale(1.03);
+  text-decoration: none;
+}
+
+.navbar .btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+}
+form {
+  max-width: 100%;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+form button.btn {
+  width: 100%;
+  font-weight: bold;
+}
+
+main, .container, .row {
+  margin-top: 0 !important;
+  padding-top: 20px;
+}

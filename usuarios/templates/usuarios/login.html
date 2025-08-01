@@ -1,12 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title_text %}Login{% endblock title_text %}
-{% block h1_text %}Login{% endblock h1_text %}
 
 {% block main %}
-<form action="{% url 'usuarios:login' %}" method="post">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    <input type="submit" value="Iniciar sesión" class="btn btn-primary">
-</form>
+<div class="container text-center mt-2">
+  <h1 class="fw-bold mb-4">Login</h1>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mb-5">
+  <div class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
+    <form action="{% url 'usuarios:login' %}" method="post">
+      {% csrf_token %}
+      {{ formulario.as_p }}
+      <input type="submit" value="Iniciar sesión" class="btn btn-primary w-100">
+    </form>
+  </div>
+  <div>
+    <img src="{% static 'assets/img/login.png' %}" alt="Login" class="img-fluid shadow rounded" style="max-width: 400px;">
+  </div>
+</div>
 {% endblock main %}
