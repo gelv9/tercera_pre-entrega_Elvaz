@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title_text %}Editar Perfil{% endblock %}
-{% block h1_text %}Editar perfil{% endblock %}
+
+{% block content %}{% endblock %}
+{% block title_text %}Editar perfil{% endblock %}
 
 {% block main %}
-<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mt-5">
-  <form method="post" enctype="multipart/form-data" class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
-  </form>
-  <img src="{% static 'assets/img/edit_profile.png' %}" alt="Editar Perfil" class="img-fluid shadow rounded" style="max-width: 400px;">
+<div class="container text-center mt-2">
+  <h1 class="fw-bold mb-4">Editar perfil</h1>
 </div>
-{% endblock %}
+
+<div class="container d-flex justify-content-center align-items-center flex-wrap gap-5 mb-5">
+  <div class="flex-grow-1" style="max-width: 500px; min-width: 300px;">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ formulario.as_p }}
+
+      {% if avatar_actual %}
+      <div class="mb-3 text-center">
+        <p class="mb-2">Avatar actual:</p>
+        <img src="{{ avatar_actual }}" alt="Avatar actual" class="rounded-circle border shadow" style="width: 100px; height: 100px; object-fit: cover;">
+      </div>
+      {% endif %}
+
+      <div class="mb-3">
+        <label for="id_avatar" class="form-label">Cambiar avatar</label>
+        <input type="file" name="avatar" id="id_avatar" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
+    </form>
+  </div>
+  <div>
+    <img src="{% static 'assets/img/edit_profile.png' %}" alt="Editar perfil" class="img-fluid shadow rounded" style="max-width: 400px;">
+  </div>
+</div>
+{% endblock main %}

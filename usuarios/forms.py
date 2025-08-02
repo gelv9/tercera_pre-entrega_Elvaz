@@ -5,8 +5,8 @@ from .models import InfoExtra
 
 class FormularioRegistro(UserCreationForm):
     email = forms.EmailField()
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Ingrese una contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Repita la contraseña",widget=forms.PasswordInput)
 
     class Meta:
         model = User

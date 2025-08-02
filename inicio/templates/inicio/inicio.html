@@ -1,32 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1 class="display-5 fw-bold">Bienvenido a ProgrAmando</h1>
-<p class="fs-4">Explorá nuestros cursos disponibles y empezá a aprender.</p>
+<div class="container px-lg-5">
+  <div class="p-3 bg-light rounded-3 text-center">
+    <div class="m-3">
+      <h1 class="display-5 fw-bold mb-2">Bienvenido a ProgrAmando</h1>
+      <p class="fs-5 mb-2">Explorá nuestros cursos disponibles y empezá a aprender.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
-{% if cursos %}
-  <div class="row mt-4">
-    {% for curso in cursos %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-          <div class="card-body">
-            <h5 class="card-title">{{ curso.titulo }}</h5>
-            <p class="card-text"><strong>Materia:</strong> {{ curso.materia }}</p>
-            <p class="card-text"><strong>Duración:</strong> {{ curso.duracion }} horas</p>
-            <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor }}</p>
+{% block main %}
+<div class="container mt-2 mb-4">
+  {% if cursos %}
+    <div class="row justify-content-center">
+      {% for curso in cursos %}
+        <div class="col-sm-10 col-md-6 col-lg-4 mb-4">
+          <div class="card h-100 shadow">
+            <div class="card-body">
+              <h5 class="card-title">{{ curso.titulo }}</h5>
+              <p class="card-text"><strong>Materia:</strong> {{ curso.materia }}</p>
+              <p class="card-text"><strong>Duración:</strong> {{ curso.duracion }} horas</p>
+              <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor }}</p>
+            </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center">Todavía no hay cursos disponibles.</p>
+  {% endif %}
+
+  <div class="text-center mt-4 mb-5">
+    <a href="{% url 'cursos:lista_cursos' %}" class="btn btn-outline-dark btn-lg fw-semibold">
+      Ver todos los cursos
+    </a>
   </div>
-{% else %}
-  <p class="mt-4">Todavía no hay cursos disponibles.</p>
-{% endif %}
-
-<div class="text-center mt-4">
-  <a href="{% url 'cursos:lista_cursos' %}" class="btn btn-outline-dark btn-lg fw-semibold">
-    Ver todos los cursos
-  </a>
 </div>
-
 {% endblock %}

@@ -18,30 +18,30 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
-    <div class="container px-lg-5">
-        <a class="navbar-brand fw-bold text-dark" href="{% url 'inicio:inicio' %}">ProgrAmando</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+  <div class="container px-lg-5">
+    <a class="navbar-brand fw-bold text-dark" href="{% url 'inicio:inicio' %}">ProgrAmando</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold text-dark" href="{% url 'inicio:about' %}">Sobre nosotros</a>
-                </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark" href="{% url 'inicio:about' %}">Sobre nosotros</a>
+        </li>
 
-                {% if user.is_authenticated and user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold text-dark" href="{% url 'cursos:alta_curso' %}">Nuevo Curso</a>
-                </li>
-                {% endif %}
+        {% if user.is_authenticated and user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark" href="{% url 'cursos:alta_curso' %}">Nuevo Curso</a>
+        </li>
+        {% endif %}
 
-                {% if user.is_authenticated %}
-                <li class="nav-item mx-2">
-                <a href="{% url 'usuarios:editar_perfil' %}" title="{{ user.username }} | Editar perfil">
-                <img src="{% if user.infoextra.avatar %}
+        {% if user.is_authenticated %}
+        <li class="nav-item d-flex align-items-center gap-2">
+          <a href="{% url 'usuarios:editar_perfil' %}" title="{{ user.username }} | Editar perfil">
+            <img src="{% if user.infoextra.avatar %}
                         {{ user.infoextra.avatar.url }}
                       {% else %}
                         {% static 'assets/img/default-avatar.png' %}
@@ -51,41 +51,41 @@
                  style="width: 40px; height: 40px; object-fit: cover; transition: transform 0.2s;"
                  onmouseover="this.style.transform='scale(1.1)'"
                  onmouseout="this.style.transform='scale(1)'">
-                </a>
-                </li>
-                <li class="nav-item mx-0 mx-lg-1">
-                <form action="{% url 'usuarios:logout' %}" method="post">
-                {% csrf_token %}
-                <input class="btn btn-outline-light nav-link py-1 px-3 rounded" type="submit" value="Salir">
-                </form>
-                </li>
-                {% else %}
-                <li class="nav-item mx-0 mx-lg-1">
-                <a class="btn btn-outline-light nav-link py-1 px-3 rounded" href="{% url 'usuarios:login' %}">Login</a>
-                </li>
-                <li class="nav-item mx-0 mx-lg-1">
-                <a class="btn btn-outline-light nav-link py-1 px-3 rounded" href="{% url 'usuarios:registro' %}">Registro</a>
-                </li>
-                {% endif %}
-
-            </ul>
-        </div>
+          </a>
+          <form action="{% url 'usuarios:logout' %}" method="post" class="m-0">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-light btn-sm px-3 py-1 rounded">
+              Salir
+            </button>
+          </form>
+        </li>
+        {% else %}
+        <li class="nav-item mx-0 mx-lg-1">
+          <a class="btn btn-outline-light nav-link py-1 px-3 rounded" href="{% url 'usuarios:login' %}">Login</a>
+        </li>
+        <li class="nav-item mx-0 mx-lg-1">
+          <a class="btn btn-outline-light nav-link py-1 px-3 rounded" href="{% url 'usuarios:registro' %}">Registro</a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
+  </div>
 </nav>
 
+
         <!-- Header-->
-        <header class="py-5">
-            <div class="container px-lg-5">
-                <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
-                    <div class="m-4 m-lg-5">
-                        {% block content %}
-                        <h1 class="display-5 fw-bold">{% block h1_text %}{% endblock h1_text %}</h1>
-                        <p class="fs-4">{% block p_text %} {% endblock %}</p>
-                        {% endblock  %}
+        {% block content %}
+            <header>
+                <div class="container px-lg-5">
+                    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                        <div class="m-4 m-lg-5">
+                            <h1 class="display-5 fw-bold">{% block h1_text %}{% endblock h1_text %}</h1>
+                            <p class="fs-4">{% block p_text %} {% endblock %}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        {% endblock %}
         <main>
             {% block main %}{% endblock %}        
         </main>
